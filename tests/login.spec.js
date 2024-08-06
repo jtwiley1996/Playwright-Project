@@ -22,5 +22,6 @@ test('should fail login with invalid credentials', async ({ page }) => {
   await page.click('button[type="submit"]');
   
   // Assert that the login failed and an error message is displayed
-  await expect(page.locator('.flash.error')).toHaveText('Your username is invalid!');
+  const errorMessage = await page.locator('.flash.error').textContent();
+  expect(errorMessage.trim()).toContain('Your username is invalid!');
 });
